@@ -32,6 +32,21 @@ function resize(data){
 			<td></td><td><div class="addList div"><input type="text" id="title" placeholder="아이디"></div></td>
 		</tr>
 		
+		<div id="addSchedule">
+		
+			<tr class="boardList">
+				<td></td><td><div class="addList div"><input type="text" id="title" placeholder="아이디"></div></td>
+			</tr>
+			
+			<tr class="boardList">
+				<td></td><td><div class="addList div"><input type="text" id="title" placeholder="아이디"></div></td>
+			</tr>
+			
+			<tr class="boardList">
+				<td></td><td><div class="addList div"><input type="text" id="title" placeholder="아이디"></div></td>
+			</tr>
+			
+		</div>
 	</tbody>
 </table>
 </body>
