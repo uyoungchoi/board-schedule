@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wychoi.app">
+ 	<select id="boardList" resultType="com.wychoi.app.data.boardData">
+ 		select
+ 			writer,
+ 			writeDate,
+ 			startDate,
+ 			endDate,
+ 			shareAcl,
+ 			title,
+ 			loofQuery,
+ 			number,
+ 			content
+ 		from board;
+ 	</select>
+</mapper> 
+ 
+ 
