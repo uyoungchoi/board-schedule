@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.wychoi.app.data.boardData;
 
-public interface boardSvc {
-	List<boardData> boardList();
-	void boardAdd(boardData dData);
+public interface loginSvc {
+	List<boardData> login();
 }

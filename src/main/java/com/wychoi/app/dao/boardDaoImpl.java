@@ -24,4 +24,16 @@ public class boardDaoImpl implements boardDao{
 		System.out.println(l.get(0).getContent());
 		 return sqlSession.selectList("boardList");
 	}
+
+	@Override
+	public List<boardData> login() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("login");
+	}
+
+	@Override
+	public void boardAdd(boardData dData) {
+		// TODO Auto-generated method stub
+		sqlSession.selectList("boardAdd", dData);
+	}
 }

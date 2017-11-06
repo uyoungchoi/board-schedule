@@ -18,7 +18,6 @@
 		    error : function(error, message) {
 		        alert(error);
 		        alert(message);
-		        debugger;
 		    },
 		    success : function(data) {
 		        $('.content.home').html(data);
@@ -31,9 +30,18 @@
 	
 	//글 삭제
 	function deleteList(){
+		var deleteDatas = [];
+		$('#boardList input:checked').each(function() {
+			deleteDatas.push(this.value);
+        });
+		debugger;
 		$.ajax({
 		    url : '/board/delete.do',
 		    method : 'GET',
+		    data : {
+		    	"deleteDatas" : JSON.stringify(deleteDatas),
+		    	"length" : deleteDatas.length
+		    },
 		    async : false,
 		    error : function(error) {
 		        alert("Error!");
@@ -74,7 +82,7 @@
 <body>
 <div>
 	<button id="addList" onclick="addListPage()"><i class="fa fa-pencil" aria-hidden="true"></i>작성</button> &nbsp;&nbsp;
-	<button id="deleteList"><i class="fa fa-times"></i>삭세</button>  &nbsp;&nbsp;
+	<button id="deleteList" onclick="deleteList()"><i class="fa fa-times"></i>삭세</button>  &nbsp;&nbsp;
 	<button id="refreshList"><i class="fa fa-refresh"></i>새로고침</button>  &nbsp;&nbsp;
 	<input type="text" id="searchText" size=20>
 	<button id="searchList">검색</button>
@@ -82,11 +90,11 @@
 <table class="boardList">
 	<thead class="board list boardList">
 		<tr align="center" class="boardList">
-			<td width="50px">삭제</td>
-	        <td width="200px">글번호</td>
-	        <td width="200px">제목</td>
-	        <td width="100px">작성자</td>
-	        <td width="100px">작성일</td>
+			<td width="10%">삭제</td>
+	        <td width="15%">글번호</td>
+	        <td width="35%">제목</td>
+	        <td width="10%">작성자</td>
+	        <td width="20%">작성일</td>
 	        <!-- 
 	        <td width="100px">작성일</td>
 	        <td width="100px">시작일</td>
@@ -96,7 +104,7 @@
 	        <td width="200px">내용</td> -->
 	    </tr>
 	</thead>
-		<tbody  class="boardList">
+		<tbody id="boardList" class="boardList">
 		<c:forEach var="book" items="${books}">
 		    <tr align="center" class="boardList">
 		        <td><input type="checkbox" value="${book.number}"></td>

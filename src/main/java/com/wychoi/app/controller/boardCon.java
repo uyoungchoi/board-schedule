@@ -1,7 +1,13 @@
 package com.wychoi.app.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,11 +42,25 @@ public class boardCon {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/board/add.do", method = RequestMethod.GET)
-	public ModelAndView add(Locale locale, Model model) {
-		System.out.println("add.do");
-		ModelAndView mv = new ModelAndView("/board/add");  //홈으로 이동
-		return mv;
+	@RequestMapping(value = "/board/add.do", method = RequestMethod.POST)
+	public void add(Locale locale, Model model, HttpServletRequest request) {
+		
+		boardData dData = new boardData();
+		
+		dData.setTitle(request.getParameter("title"));
+		dData.setContent(request.getParameter("content"));
+		dData.setUseCalendar(Integer.parseInt(request.getParameter("useCalendar")));
+		dData.setUseShare(Integer.parseInt(request.getParameter("useShare")));
+		
+		HttpSession session = request.getSession();
+		dData.setWriter(session.getAttribute("id").toString());
+
+		Date date = new Date();
+		dData.setWriteDate(new SimpleDateFormat("yyyy-MM-dd HH:MM:SS").format(date));
+		dData.setStartDate(request.getParameter("startDate"));
+		dData.setEndDate(request.getParameter("endDate"));
+		
+		boardSvc.boardAdd(dData);
 	}
 	
 	@RequestMapping(value = "/board/addPage.do", method = RequestMethod.GET)
@@ -51,9 +71,11 @@ public class boardCon {
 	}
 	
 	@RequestMapping(value = "/board/delete.do", method = RequestMethod.GET)
-	public ModelAndView delete(Locale locale, Model model) {
-		ModelAndView mv = new ModelAndView("/board/delete");  //홈으로 이동
-		return mv;
+	public void delete(Locale locale, Model model, HttpServletRequest request) {
+		String deleteDatas = request.getParameter("deleteDatas");
+		System.out.println(request.getParameter("deleteDatas"));
+		String length = request.getParameter("length");
+		System.out.println("l : "+deleteDatas+"\n length : "+length);
 	}
 	
 	@RequestMapping(value = "/board/update.do", method = RequestMethod.GET)

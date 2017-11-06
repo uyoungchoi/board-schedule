@@ -18,7 +18,6 @@ $( document ).ready(function() {
 	    },
 	    success : function(data) {
 	        alert("success!");
-	        debugger;
 	    },
 	    complete : function() {
 	        alert("complete!");    

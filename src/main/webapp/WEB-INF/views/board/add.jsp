@@ -18,7 +18,6 @@
 	});
 	function onload(){
 		//처음 실행시 할 작업
-		debugger;
 		$(".board.add.addBoard").css("display", "none");
 		$("#board.add.content").resizable();
 		$(".board.add.datepicker").datepicker();
@@ -37,31 +36,38 @@
 	
 	function addList(){
 		var useCalendar = 0; //사용안함.
-		
+		var useShare = 0;
 		if($( "input#useCalendar:checked" ).val() == undefined){
 			useCalendar = 0;
 		}else{
 			userCalendar = 1;
 		}
 		
+		if($( "input#useCalendar:checked" ).val() == undefined){
+			useShare = 0;
+		}else{
+			useShare = 1;
+		}
+		
 		$.ajax({
-		    url : '/board/list.do',
-		    method : 'GET',
+		    url : '/board/add.do',
+		    method : 'POST',
 		    async : false,
 		    data : {
-		    	"title" : $("#title").value(),
-		    	"content" : $("#content").value(),
-		    	"userCalendar" : useCalendar
+		    	"title" : $("#title").val(),
+		    	"content" : $("#content").val(),
+		    	"useCalendar" : useCalendar,
+		    	"useShare" :useShare,
+		    	"startDate" : $("#startDate").val(),
+		    	"endDate" : $("#endDate").val()
 		    },
 		    error : function(error) {
 		        alert("Error!");
 		    },
 		    success : function(data) {
 		        alert("등록되었습니다.");
+		        $(".content.home").load("/board/list.do");
 		        //게시판 홈으로 이동
-		    },
-		    complete : function() {
-		        alert("complete!");    
 		    }
 		});
 	}
@@ -103,7 +109,8 @@
 				<input type="text" class="board add datepicker">
 			</div> -->
 			<div class="board add boardList">
-				<input type="text" class="board add datepicker">
+				<input type="text" class="board add datepicker" id="startDate">
+				<input type="text" class="board add datepicker" id="endDate">
 			</div>
 		</div>
 		

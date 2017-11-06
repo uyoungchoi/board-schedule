@@ -5,30 +5,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<% session = request.getSession(); %>
 <link rel="stylesheet" type="text/css" href="resources/css/allCss.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <script>
-function login(){
+function loginPage(){
 	$.ajax({
-        url : 'home/login.do',
-        method : 'GET',
-        async : false
+        url : 'home/loginPage.do',
+        method : 'POST',
+        async : false,
+        success : function(){
+        	history.go(-1);
+        }
     });
 }
-function logout(){
+function logoutPage(){
 	//쿠키제거
 }
-function myInfo(){
+function myInfoPage(){
 	//내 정보 보기
 	$.ajax({
         url : 'home/myInfo.do',
-        method : 'GET',
+        method : 'POST',
         async : false
     });
 }
-function join(){
+function joinPage(){
 	//회원가입
 	$.ajax({
         url : 'home/join.do',
@@ -39,11 +43,12 @@ function join(){
 </script>
 <body>
 <div class="header home">
-
-<a href="#" onclick="login()">로그인 |</a>
-<a href="#" onclick="join()">회원가입 </a>
-
-<a href="#" onclick="logout()">로그아웃 |</a>
-<a href="#" onclick="myInfo()">내정보</a></div> 
+<% if(session.getValue("id") == null){ %>
+<a href="#" onclick="loginPage()">로그인 |</a>
+<a href="#" onclick="joinPage()">회원가입 </a>
+<%}else{%>
+<a href="#" onclick="logoutPage()">로그아웃 |</a>
+<a href="#" onclick="myInfoPage()">내정보</a></div> 
+<%}%>
 </body>
 </html>

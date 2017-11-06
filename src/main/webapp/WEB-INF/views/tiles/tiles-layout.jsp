@@ -32,10 +32,9 @@ $( document ).ready(function() {
 	$("#schedule").	attr("onclick", "toggle");
 	$("#board").	attr("onclick", "toggle");  //toggle함수 호출
 	
-	$(".content.home").load("../schedule/scheduleHome.do");
+	$(".content.home").load("/schedule/scheduleHome.do");
 });
 function onComplete(){
-	debugger;
 	$(".board.add.addBoard").css("display", "none");
 	$("#board.add.content").resizable();
 	$(".board.add.datepicker").datepicker();
@@ -51,7 +50,7 @@ function toggle(data){
 		$('[name=schedule]').attr("class", "noSelect");
 		
 	}else{
-		$(".content.home").load("../schedule/scheduleHome.jsp");
+		$(".content.home").load("/schedule/scheduleHome.do");
 		/* $("#boardContent").css("display", "none");
 		$("#scheduleContent").css("display", "block");*/
 		
@@ -60,7 +59,6 @@ function toggle(data){
 	}
 }
 function onload(){
-	debugger;
 }
 </script>
 </head>

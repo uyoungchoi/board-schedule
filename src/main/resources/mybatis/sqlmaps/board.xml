@@ -8,13 +8,31 @@
  			writeDate,
  			startDate,
  			endDate,
- 			shareAcl,
+ 			useCalendar,
+ 			useShare,
  			title,
  			loofQuery,
  			number,
  			content
  		from board;
  	</select>
+ 	
+ 	<insert id="boardAdd" parameterType="com.wychoi.app.data.boardData">
+ 		insert
+ 			into board
+ 			(title, content, useCalendar, useShare, writer, startDate, endDate, writeDate)
+ 			values(
+	 			#{title},
+	 			#{content},
+	 			#{useCalendar},
+	 			#{useShare},
+	 			#{writer},
+	 			#{startDate},
+	 			#{endDate},
+	 			#{writeDate}
+ 			)
+ 			
+ 	</insert>
 </mapper> 
  
  
