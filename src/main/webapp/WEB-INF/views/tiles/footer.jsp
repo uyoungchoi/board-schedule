@@ -5,14 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/allCss.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="header home">
-
-<a href="#" onclick="login()">로그인 |</a>
-<a href="#" onclick="join()">회원가입 </a>
-
-<a href="#" onclick="logout()">로그아웃 |</a>
-<a href="#" onclick="myInfo()">내정보</a></div> 
+footer
 </body>
 </html>

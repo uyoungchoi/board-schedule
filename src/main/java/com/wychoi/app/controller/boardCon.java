@@ -38,13 +38,15 @@ public class boardCon {
 	
 	@RequestMapping(value = "/board/add.do", method = RequestMethod.GET)
 	public ModelAndView add(Locale locale, Model model) {
+		System.out.println("add.do");
 		ModelAndView mv = new ModelAndView("/board/add");  //홈으로 이동
 		return mv;
 	}
 	
 	@RequestMapping(value = "/board/addPage.do", method = RequestMethod.GET)
 	public ModelAndView addPage(Locale locale, Model model) {
-		ModelAndView mv = new ModelAndView("/board/add");  //홈으로 이동
+		System.out.println("addPAge");
+		ModelAndView mv = new ModelAndView("/board/add");
 		return mv;
 	}
 	

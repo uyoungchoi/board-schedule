@@ -5,7 +5,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/allCss.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+<script>
+function login(){
+	$.ajax({
+        url : 'home/login.do',
+        method : 'GET',
+        async : false
+    });
+}
+function logout(){
+	//쿠키제거
+}
+function myInfo(){
+	//내 정보 보기
+	$.ajax({
+        url : 'home/myInfo.do',
+        method : 'GET',
+        async : false
+    });
+}
+function join(){
+	//회원가입
+	$.ajax({
+        url : 'home/join.do',
+        method : 'GET',
+        async : false
+    });
+}
+</script>
 <body>
 <div class="header home">
 

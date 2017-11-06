@@ -10,9 +10,24 @@
 </title>
 <script>
 	//글 등록
-	$( "#addList" ).click(function() {
-		$('.content.home').load('board/addPage.do');
-	});
+	function addListPage(){
+		 $.ajax({
+		    url : 'board/addPage.do',
+		    method : 'GET',
+		    async : false,
+		    error : function(error, message) {
+		        alert(error);
+		        alert(message);
+		        debugger;
+		    },
+		    success : function(data) {
+		        $('.content.home').html(data);
+		    },
+		    complete : function() {
+		    }
+		}); 
+		/* $('.content.home').load("/board/add.jsp"); */
+	}
 	
 	//글 삭제
 	function deleteList(){
@@ -25,7 +40,6 @@
 		    },
 		    success : function(data) {
 		        alert("success!");
-		        debugger;
 		    },
 		    complete : function() {
 		        alert("complete!");    
@@ -43,7 +57,6 @@
 		    },
 		    success : function(data) {
 		        alert("success!");
-		        debugger;
 		    },
 		    complete : function() {
 		        alert("complete!");    
@@ -51,19 +64,26 @@
 		});
 	}
 </script>
+
+<style>
+.board.list.boardList{
+	
+}
+</style>
 </head>
 <body>
 <div>
-	<button id="addList"><i class="fa fa-pencil" aria-hidden="true"></i>작성</button> &nbsp;&nbsp;
+	<button id="addList" onclick="addListPage()"><i class="fa fa-pencil" aria-hidden="true"></i>작성</button> &nbsp;&nbsp;
 	<button id="deleteList"><i class="fa fa-times"></i>삭세</button>  &nbsp;&nbsp;
 	<button id="refreshList"><i class="fa fa-refresh"></i>새로고침</button>  &nbsp;&nbsp;
 	<input type="text" id="searchText" size=20>
 	<button id="searchList">검색</button>
 </div>
 <table class="boardList">
-	<thead class="boardList">
+	<thead class="board list boardList">
 		<tr align="center" class="boardList">
-	        <td width="200px">글 번호</td>
+			<td width="50px">삭제</td>
+	        <td width="200px">글번호</td>
 	        <td width="200px">제목</td>
 	        <td width="100px">작성자</td>
 	        <td width="100px">작성일</td>
@@ -79,6 +99,7 @@
 		<tbody  class="boardList">
 		<c:forEach var="book" items="${books}">
 		    <tr align="center" class="boardList">
+		        <td><input type="checkbox" value="${book.number}"></td>
 		        <td>${book.number}</td>
 		        <td>${book.title}</td>
 		        <td>${book.writer}</td>

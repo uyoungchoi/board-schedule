@@ -26,10 +26,10 @@ public class scheduleCon {
 	
 	private static scheduleSvcImpl scheduleSvc;
 	
-	@RequestMapping(value = "schedule/list.do", method = RequestMethod.GET)
-	public @ResponseBody JSONObject list(HttpServletRequest request) {
-		return null;
-		
+	@RequestMapping(value = "schedule/scheduleHome.do", method = RequestMethod.GET)
+	public ModelAndView home(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/schedule/scheduleHome");  //홈으로 이동
+		return mv;
 	}
 	//스케줄추가
 	@RequestMapping(value = "schedule/addSchedule.do", method = RequestMethod.GET)
