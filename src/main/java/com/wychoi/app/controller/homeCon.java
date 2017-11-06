@@ -26,7 +26,7 @@ public class homeCon {
 	//메인페이지로 이동
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
-		ModelAndView mv = new ModelAndView("/home/home");  //홈으로 이동
+		ModelAndView mv = new ModelAndView("/tiles/tiles-layout");  //홈으로 이동
 		return mv;
 	}
 	//로그인 성공시 callback 될 함수
