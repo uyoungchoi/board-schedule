@@ -10,6 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="title home">음...</div>
+<div class="title home">일정 연동 게시판</div>
 </body>
 </html>

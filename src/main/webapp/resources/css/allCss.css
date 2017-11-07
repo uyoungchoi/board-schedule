@@ -28,7 +28,8 @@ html, body { height:100%; overflow:hidden }
 .title.home{
     text-align: center;
     font-size: 40px;
-    padding-top: 50px;
+    padding-top: 8%;
+    padding-bottom:4%;
     font-weight: 700;
 }
 
@@ -61,7 +62,7 @@ a{
 a:hover{
 	color:black;
 }
-/* 
+
 #calendar{
 	padding-top:20px;
 }
@@ -78,6 +79,52 @@ a:hover{
 	height:100%;
 }
 
+.date-cell.sun, .sun{
+	color:red;
+}
+
+td.date-cell{
+	height: 50px;
+    width: 50px;
+    text-align: left;
+    padding-top: 0px;
+    vertical-align: top;
+}
+
+td.date{
+	height: 50px;
+    width: 50px;
+    text-align: center;
+    padding-top: 0px;
+    vertical-align: top;
+}
+
+.btn {
+	text-align: center;
+	margin: 10px 0 10px 0;
+}
+
+#calendar table {
+	text-align: center;
+	border : 1px solid black
+}
+td.schedule, td.schedule{
+	border:1px solid black;
+}
+.date-cell.not-this-month{
+	color:gray;
+} 
+
+.board.list{
+	padding-top:20px;
+	width: 900px;
+	margin: 0 auto;
+}
+.board.content.add{
+	padding-top:20px;
+	width: 900px;
+	margin: 0 auto;
+}
 #btnPrev, #btnNext{
 	display: inline-block;
     font-size: 15px;
@@ -89,57 +136,38 @@ a:hover{
     outline: none;
 }
 
-.date-cell.sun, .sun{
-	color:red;
-}
-
-td{
-	height: 50px;
-    width: 50px;
-    text-align: left;
-    padding-top: 0px;
-    vertical-align: top;
-}
-
-.wrap{
-	width: 500px;
-	margin: 0 auto;
-}
-.btn {
+.schedule.btn {
 	text-align: center;
 	margin: 10px 0 10px 0;
 }
-#calendar table {
-	text-align: center;
-	border : 1px solid black
+.schedule.wrap{
+	padding-top:20px;
+	width: 500px;
+	margin: 0 auto;
 }
-td.schedule, td.schedule{
-	border:1px solid black;
-}
-.date-cell.not-this-month{
-	color:gray;
-} 
-.noPopup{
-	display:none !important;
-}
-.yesPopup{
-	
+.fa.fa-times{
+	float:right;
 }
 .ib{
 	display:inline-block;
 }
-#addSchedulePopup{
+.schedule.addSchedulePopup{
 	z-index:10000;
-	background-color:white;
-	display:inline-block;
+	background-color:#ad967e;
 	position:absolute;
 	top:0px;
 	left:0px;
 	width:250px;
 }
-*/
+table.boardList{
+	margin-top : 15px;
+}
+table.boardList tbody tr.boardList{
+	height: 30px;
+}
 table.boardList thead tr.boardList{
-	height: 54px;
+	margin-top:10px;
+	height: 35px;
     background-color: #f5f5f6;
     border: 0;
     border-top: 1px solid #e8e8ea;
@@ -152,7 +180,9 @@ table.boardList thead tr.boardList{
     font-size: 15px;
     line-height: 2.0;
 }
-
+table.boardList{
+	width:100%
+}
 thead.boardList{
 	width: 100%;
     margin-top: 17px;
@@ -175,8 +205,36 @@ table.boardList>tr.boardList{
     line-height: 1.6;
     letter-spacing: -0.4px;
 }
-
+.ib.schedule.popup.data{
+	font-size:small;
+}
+tr.schedule{
+	padding : 10px;
+}
+td.boardList{
+	padding : 0px;
+	margin-top:10px;
+	background-color: #ad967e;
+}
 .addList.div{
 	
 }
-
+.schedule.content{
+	margin: 5px;
+    border: 2px solid #ad967f;
+    height: 100%;
+    width:100%;
+    display:inline-block;
+}
+.schedule.content.data{
+	margin: 5px;
+    padding-bottom: 50px;
+    padding-top:50px;
+    border: 2px solid #ad967f;
+    height: 100%;
+    width:100%;
+    display:inline-block;
+}
+.addList.div.input{
+	width:80%
+}

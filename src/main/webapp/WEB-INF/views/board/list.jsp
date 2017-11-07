@@ -54,23 +54,6 @@
 		    }
 		});
 	}
-	//새로고침
-	function refreshList(){
-		$.ajax({
-		    url : '/board/list.do',
-		    method : 'GET',
-		    async : false,
-		    error : function(error) {
-		        alert("Error!");
-		    },
-		    success : function(data) {
-		        alert("success!");
-		    },
-		    complete : function() {
-		        alert("complete!");    
-		    }
-		});
-	}
 </script>
 
 <style>
@@ -80,21 +63,21 @@
 </style>
 </head>
 <body>
+<div class="board list">
 <div>
 	<button id="addList" onclick="addListPage()"><i class="fa fa-pencil" aria-hidden="true"></i>작성</button> &nbsp;&nbsp;
 	<button id="deleteList" onclick="deleteList()"><i class="fa fa-times"></i>삭세</button>  &nbsp;&nbsp;
-	<button id="refreshList"><i class="fa fa-refresh"></i>새로고침</button>  &nbsp;&nbsp;
 	<input type="text" id="searchText" size=20>
 	<button id="searchList">검색</button>
 </div>
 <table class="boardList">
 	<thead class="board list boardList">
 		<tr align="center" class="boardList">
-			<td width="10%">삭제</td>
-	        <td width="15%">글번호</td>
-	        <td width="35%">제목</td>
-	        <td width="10%">작성자</td>
-	        <td width="20%">작성일</td>
+			<td width="10%" class="boardList">삭제</td>
+	        <td width="15%" class="boardList">글번호</td>
+	        <td width="35%" class="boardList">제목</td>
+	        <td width="10%" class="boardList">작성자</td>
+	        <td width="20%" class="boardList">작성일</td>
 	        <!-- 
 	        <td width="100px">작성일</td>
 	        <td width="100px">시작일</td>
@@ -122,8 +105,9 @@
 		</c:forEach>
 	</tbody>
 	<tfoot>
-		<tr class="boardList"><td>//페이징처리</td></tr>
+		<tr class="boardList"><td></td></tr>
 	</tfoot>
 </table>
+</div>
 </body>
 </html>

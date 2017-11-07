@@ -87,12 +87,13 @@
 
 </head>
 <body onload="alert('a')">
+	<div class="board content add">
 		<div class="board add boardList">
-			<div>제목</div><div class="addList div"><input type="text" id="title" placeholder="제목"></div>
+			<div>제목</div><div class="addList div input"><input type="text" id="title" placeholder="제목" class="schedule content"></div>
 		</div>
 		
 		<div class="board add boardList">
-			<div>내용</div><div class="addList div"><input type="text" id="content" placeholder="내용"></div>
+			<div>내용</div><div class="addList div input"><input type="text" id="content" placeholder="내용" class="schedule content data"></div>
 			<!-- <div><input type="button" class="yesSelect" value="일정" onclick="resize(this)"></div> -->
 		</div>
 		
@@ -117,5 +118,6 @@
 		<div class="board add boardList">
 			<div class="addList div"><input type="button" id="addList" onclick="addList()" value="일정등록"></div>
 		</div>
+	</div>
 </body>
 </html>

@@ -55,7 +55,7 @@ $( document ).ready(function() {
 				sClass += i % 7 == 6 ? ' sat' : '';
 				arrTable.push('<td class="date'+sClass+'">' + arrWeek[i] + '</td>');
 			}
-			arrTable.push('</tr></thead>');
+			arrTable.push('</tr"></thead>');
 			arrTable.push('<tbody>');
 	
 			var oStartDt = new Date(m_oMonth.getTime());
@@ -122,6 +122,7 @@ $( document ).ready(function() {
 });
 function addSchedulePopup(data){
 	//div를 그림..
+	debugger;
 	var $href = window.event;
 	$href.pageX;
 	
@@ -131,21 +132,25 @@ function addSchedulePopup(data){
 	var yData = event.screenY;
 	
 	//div를 그리고
-	$('#addSchedulePopup').attr("class", "yesPopup");
+	$('.schedule.addSchedulePopup').css("display", "inline-block");
 	$('#timePopup').text()
 	
 	//클릭한 날짜를 가져옴.
 	data.getAttribute("value")
 	
 	//위치 세팅
-	$('#addSchedulePopup').css("top", $href.pageY);
-	$('#addSchedulePopup').css("left", $href.pageX);
+	$('.schedule.addSchedulePopup').css("top", $href.pageY);
+	$('.schedule.addSchedulePopup').css("left", $href.pageX);
 	
 	$('#titlePopup').focus();
 	
+	$("#month").text($(data).parent().parent().parent().parent().parent().children(".btn").children("#currentDate").text());
+	$("#date").text($(data).text());
+	
 }
 function closeSchedulePopup(){
-	$('#addSchedulePopup').attr("class", "noPopup");
+	debugger;
+	$('.schedule.addSchedulePopup').css("display", "none");
 }
 function addPopup(){
 	var data = {
@@ -164,18 +169,19 @@ function addPopup(){
 
 </style>
 <body>
-<div class='wrap'>
-	<div class='btn'>
+<div class='schedule wrap'>
+	<div class='schedule btn'>
 		<button id='btnPrev'>&lt;</button>
 		 <span id='currentDate'></span> 
 		<button id='btnNext'>&gt;</button>
 	</div>
+	
 	<div id="calendar"></div>
 	
-	<div id="addSchedulePopup" class="noPopup">
-		<div class="ib">일정등록</div><i class="fa fa-times" onclick="closeSchedulePopup()"></i><br><br>
-		<div class="ib">제목</div><input type="text" placeholder="제목없음" id="titlePopup"><br>
-		<div class="ib">시간</div><div id="timePopup"></div>
+	<div class="schedule addSchedulePopup" style="display:none">
+		&nbsp;&nbsp;<div class="ib">일정등록</div><i class="fa fa-times" onclick="closeSchedulePopup()"></i><br><br>
+		<div class="ib">제목</div>&nbsp;<input type="text" placeholder="제목없음" id="titlePopup"><br>
+		<div class="ib">시간</div>&nbsp;<div id="month" class="ib schedule popup data"></div>&nbsp;<div id="date" class="ib schedule popup data"></div>일<br><br>
 		<input type="button" value="등록" class="yesSelect" onclick="addPopup()">
 	</div>
 </div>
