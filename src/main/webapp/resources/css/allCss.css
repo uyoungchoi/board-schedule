@@ -150,6 +150,7 @@ td.schedule, td.schedule{
 }
 .ib{
 	display:inline-block;
+	width : 80px;
 }
 .schedule.addSchedulePopup{
 	z-index:10000;
@@ -246,4 +247,17 @@ input.schedule.content{
 .board.add.boardList div{
 	display:inline-block;
 	padding:10px;
+}
+.login.div.input{
+	width : 25%;
+}
+input[type=button]{
+	display: inline-block;
+    font-size: 15px;
+    background-color: #ad967e;
+    border-radius: 5px;
+    border: none;
+    width: 60px;
+    height: 30px;
+    outline: none;
 }

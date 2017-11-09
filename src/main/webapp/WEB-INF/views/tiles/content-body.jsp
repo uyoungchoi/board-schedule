@@ -20,32 +20,6 @@ window.onload = function (){
 	$(".content.home").load("../schedule/scheduleHome.jsp");
 }
 
-function login(){
-	$.ajax({
-        url : 'home/login.do',
-        method : 'GET',
-        async : false
-    });
-}
-function logout(){
-	//쿠키제거
-}
-function myInfo(){
-	//내 정보 보기
-	$.ajax({
-        url : 'home/myInfo.do',
-        method : 'GET',
-        async : false
-    });
-}
-function join(){
-	//회원가입
-	$.ajax({
-        url : 'home/join.do',
-        method : 'GET',
-        async : false
-    });
-}
 function toggle(data){
 	if(data.getAttribute("name")=="board"){   //보이는 화면 변경(게시판 클릭시)
 		$(".content.home").load("/board/list.do");

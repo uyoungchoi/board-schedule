@@ -15,7 +15,7 @@
  			number,
  			content
  		from board
- 		where type=board;
+ 		where type='board';
  	</select>
  	
  	<insert id="boardAdd" parameterType="com.wychoi.app.data.boardData">
@@ -38,14 +38,13 @@
  		select
  			count(*) as count
  		from board
- 		where type=board;
+ 		where type='board';
  	</select>
  	
  	<delete id="boardDelete" parameterType="int">
  	 	delete 
  	 		from board 
- 	 		where number = #{deleteData} and
- 	 		type = board;
+ 	 		where number = #{deleteData};
  	</delete>
  	
  	<select id="detailList"  parameterType="int" resultType="com.wychoi.app.data.boardData">
@@ -61,8 +60,7 @@
  			number,
  			content
  		from board
- 		where number = #{data} and
- 			  type = board;
+ 		where number = #{data};
  	</select>
  	
  	<insert id="scheduleAdd" parameterType="com.wychoi.app.data.boardData">

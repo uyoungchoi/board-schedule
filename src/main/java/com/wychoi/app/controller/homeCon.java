@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wychoi.app.data.boardData;
 import com.wychoi.app.impl.oauthSvcImpl;
-import com.wychoi.app.service.loginSvc;
+import com.wychoi.app.service.userSvc;
 
 
 /**
@@ -25,15 +25,15 @@ import com.wychoi.app.service.loginSvc;
 @Controller
 public class homeCon {
 	
-	private loginSvc loginSvc;
+	private userSvc loginSvc;
 	private static final Logger logger = LoggerFactory.getLogger(homeCon.class);
 	
 	//메인페이지로 이동
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model, HttpServletRequest request) {
 		//테스트용도로 session 생성
-		HttpSession session = request.getSession();
-		session.setAttribute("id", "wychoi");
+		/*HttpSession session = request.getSession();
+		session.setAttribute("id", "wychoi");*/
 		ModelAndView mv = new ModelAndView("/tiles/tiles-layout");  //홈으로 이동
 		return mv;
 	}

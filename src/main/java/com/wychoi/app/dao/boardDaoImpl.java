@@ -29,11 +29,6 @@ public class boardDaoImpl implements boardDao{
 		return sqlSession.selectOne("boardList");
 	}
 	
-	@Override
-	public List<boardData> login() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("login");
-	}
 
 	@Override
 	public void boardAdd(boardData dData) {
