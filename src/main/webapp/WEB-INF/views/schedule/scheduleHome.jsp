@@ -160,17 +160,39 @@ function addPopup(){
 		useCalendar = 0;
 	}else{
 		useCalendar = 1;
-	}
+	}`
+	debugger;
+	var startDate = $("#month").text().concat($("#date").text());
+	var endDate = $("#month").text().concat($("#date").text());
+	startDate.replaceAll("년", "-");
+	startDate.replace("월", "-");
+	startDate.replace(" ", "");
+	
+	endDate.replace("년", "-");
+	endDate.replace("월", "-");
+	endDate.replace(" ", "");
+	alert(startDate);
+	alert(endDate);
 	
 	$.ajax({
 		data : {
 			"title" : $('#titlePopup').val(),
 			"content" : $("month").val()+$("date").val(),
-			"useShare" : useCalendar
+			"useShare" : useCalendar,
+			"startDate" : startDate,
+			"endDate" : endDate,
 		},
         url : 'schedule/addSchedule.do',
         method : 'GET',
-        async : false
+        async : false,
+	    error : function(error) {
+	        alert("Error!");
+	    },
+	    success : function(data) {
+	        alert("등록되었습니다.");
+	        $(".content.home").load("/board/list.do");
+	        //게시판 홈으로 이동
+	    }
     });
 }
 </script>

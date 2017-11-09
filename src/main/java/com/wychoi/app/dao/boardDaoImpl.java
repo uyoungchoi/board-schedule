@@ -58,4 +58,11 @@ public class boardDaoImpl implements boardDao{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("detailList", data);
 	}
+
+	@Override
+	public void scheduleAdd(boardData dData) {
+		// TODO Auto-generated method stub
+		sqlSession.selectList("scheduleAdd", dData);
+		
+	}
 }

@@ -39,53 +39,18 @@ public class homeCon {
 	}
 	
 	//메인페이지로 이동
-	@RequestMapping(value = "/home/login.do", method = RequestMethod.GET)
-	public void login(Locale locale, Model model, HttpServletRequest request) {
-		
-		List<boardData> l = loginSvc.login();
-		
-		if(l.get(0) != null) {	 
-			HttpSession session = request.getSession(false);
-		     
-		     if(session != null){ 
-		    	 session.invalidate(); 
-		     }
-		     
-		     session = request.getSession(true); 
-		     session.setAttribute("id", l.get(0));  //아이디로 세션 생성
-		};
-	}
-		
-		
-	//메인페이지로 이동
-	@RequestMapping(value = "/home/loginPage.do", method = RequestMethod.GET)
-	public ModelAndView loginPage(Locale locale, Model model) {
-		ModelAndView mv = new ModelAndView("/tiles/tiles-layout");  //홈으로 이동
-		return mv;
-	}
-	
-	//메인페이지로 이동
-	@RequestMapping(value = "/home/logout.do", method = RequestMethod.GET)
-	public ModelAndView logout(Locale locale, Model model) {
-		ModelAndView mv = new ModelAndView("/tiles/tiles-layout");  //홈으로 이동
-		return mv;
-	}
-	
-
-	//메인페이지로 이동
 	@RequestMapping(value = "/home/myInfo.do", method = RequestMethod.GET)
 	public ModelAndView myInfo(Locale locale, Model model) {
 		ModelAndView mv = new ModelAndView("/home/myInfo");  //홈으로 이동
 		return mv;
 	}
 	
-	
 	//로그인 성공시 callback 될 함수
-	@RequestMapping(value = "/Callback", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/Callback", method = RequestMethod.GET)
 	public ModelAndView googleCallback(Model model, HttpServletRequest request) {
 		String code = request.getParameter("code");
 		ModelAndView mv = new ModelAndView("/oauth/loginSuccess");  //홈으로 이동
 		mv.addObject(code);
 		return mv;
-	}
+	}*/
 }

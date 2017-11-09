@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -19,13 +20,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonParser;
 import com.wychoi.app.data.boardData;
 import com.wychoi.app.impl.scheduleSvcImpl;
+import com.wychoi.app.service.boardSvc;
 
 @Controller
 public class scheduleCon {
 	
 	private static final Logger logger = LoggerFactory.getLogger(homeCon.class);
 	
-	private static scheduleSvcImpl scheduleSvc;
+	@Autowired
+	boardSvc boardSvc; 
 	
 	@RequestMapping(value = "schedule/scheduleHome.do", method = RequestMethod.GET)
 	public ModelAndView home(HttpServletRequest request) {
@@ -37,29 +40,22 @@ public class scheduleCon {
 	@RequestMapping(value = "schedule/addSchedule.do", method = RequestMethod.GET)
 	public void addSchedule(HttpServletRequest request) {
 	
-		/*scheduleSvc = new scheduleSvcImpl();
-		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		
-		HashMap<String, String> jsonObject = new HashMap<String, String>();
-		jsonObject.put("title", title);
-		jsonObject.put("content", content);
-		
-		//받은데이터로 db 쿼리 생성
-		scheduleSvc.addSchedule(jsonObject);
-		JSONObject returnData = new JSONObject();
-		returnData.put("status", "success");
-		
-		return returnData;*/
-		
 		boardData dData = new boardData();
 		
 		dData.setTitle(request.getParameter("title"));
 		dData.setContent(request.getParameter("content"));
 		dData.setUseShare(Integer.parseInt(request.getParameter("useShare")));
 		dData.setUseCalendar(1);  //달력은 무조건 사용
+
+		HttpSession session = request.getSession();
+		dData.setWriter(session.getAttribute("id").toString());  //현재 id로 등록
+		dData.setType("schedule");  //board 또는 schedule
 		
-		
+		if(request.getParameter("content") == "") {
+			dData.setStartDate(null);
+		}else {
+			dData.setStartDate(request.getParameter("content"));
+		}
+		boardSvc.scheduleAdd(dData);
 	}
 }

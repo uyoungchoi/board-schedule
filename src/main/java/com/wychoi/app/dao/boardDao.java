@@ -12,4 +12,6 @@ public interface boardDao {
 	void boardAdd(boardData dData);
 	void deleteList(int deleteData);
 	int boardCount();
+	
+	void scheduleAdd(boardData dData);
 }

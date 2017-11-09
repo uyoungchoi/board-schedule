@@ -53,5 +53,11 @@ public class boardSvcImpl implements boardSvc{
 		return boardDao.detailList(data);
 	}
 
+	@Override
+	public void scheduleAdd(boardData dData) {
+		// TODO Auto-generated method stub
+		boardDao.scheduleAdd(dData);
+	}
+
 
 }

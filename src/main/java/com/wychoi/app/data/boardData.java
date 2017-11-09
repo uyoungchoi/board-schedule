@@ -16,6 +16,15 @@ public class boardData {
 	private String endDate;
 	private String id;
 	private String passwd;
+	private String type;
+	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 	public String getWriter() {
 		return writer;
