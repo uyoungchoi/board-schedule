@@ -74,9 +74,9 @@ a:hover{
 
 #scheduleContent, #boardContent, #content{
 	margin:5px;
-	padding-top:50px;
 	border:2px solid #ad967f;
 	height:100%;
+	padding:10px;
 }
 
 .date-cell.sun, .sun{
@@ -219,12 +219,13 @@ td.boardList{
 .addList.div{
 	
 }
-.schedule.content{
+input.schedule.content{
 	margin: 5px;
     border: 2px solid #ad967f;
     height: 100%;
     width:100%;
     display:inline-block;
+    padding:10px;
 }
 .schedule.content.data{
 	margin: 5px;
@@ -236,5 +237,13 @@ td.boardList{
     display:inline-block;
 }
 .addList.div.input{
-	width:80%
+	width:100%
+}
+.board.add.addBoard{
+	padding-left:20px;
+	
+}
+.board.add.boardList div{
+	display:inline-block;
+	padding:10px;
 }

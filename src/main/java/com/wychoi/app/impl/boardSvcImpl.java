@@ -24,9 +24,34 @@ public class boardSvcImpl implements boardSvc{
 	}
 
 	@Override
+	public List<boardData> boardListOne() {
+		// TODO Auto-generated method stub
+		return boardDao.boardListOne();
+	}
+	
+	@Override
 	public void boardAdd(boardData dData) {
 		// TODO Auto-generated method stub
 		boardDao.boardAdd(dData);
 	}
+
+	@Override
+	public void deleteList(int deleteData) {
+		// TODO Auto-generated method stub
+		boardDao.deleteList(deleteData);
+	}
+
+	@Override
+	public int boardCount() {
+		// TODO Auto-generated method stub
+		return boardDao.boardCount();
+	}
+
+	@Override
+	public List<boardData> detailList(int data) {
+		// TODO Auto-generated method stub
+		return boardDao.detailList(data);
+	}
+
 
 }

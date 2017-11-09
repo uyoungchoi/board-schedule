@@ -153,12 +153,21 @@ function closeSchedulePopup(){
 	$('.schedule.addSchedulePopup').css("display", "none");
 }
 function addPopup(){
-	var data = {
-			"title" : $('#titlePopup').val(),
-			"content" : ""
-	};
+	
+	var useShare = 0;
+	
+	if($( "input#useCalendar:checked" ).val() == undefined){
+		useCalendar = 0;
+	}else{
+		useCalendar = 1;
+	}
+	
 	$.ajax({
-		data : data,
+		data : {
+			"title" : $('#titlePopup').val(),
+			"content" : $("month").val()+$("date").val(),
+			"useShare" : useCalendar
+		},
         url : 'schedule/addSchedule.do',
         method : 'GET',
         async : false
@@ -182,6 +191,8 @@ function addPopup(){
 		&nbsp;&nbsp;<div class="ib">일정등록</div><i class="fa fa-times" onclick="closeSchedulePopup()"></i><br><br>
 		<div class="ib">제목</div>&nbsp;<input type="text" placeholder="제목없음" id="titlePopup"><br>
 		<div class="ib">시간</div>&nbsp;<div id="month" class="ib schedule popup data"></div>&nbsp;<div id="date" class="ib schedule popup data"></div>일<br><br>
+		<div class="ib"><input type="checkbox" value="useShare" id="useShare" selected><label for="useShare">공유일정</label></div><br><br>
+		
 		<input type="button" value="등록" class="yesSelect" onclick="addPopup()">
 	</div>
 </div>

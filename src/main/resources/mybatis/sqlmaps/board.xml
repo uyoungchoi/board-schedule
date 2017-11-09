@@ -31,8 +31,35 @@
 	 			#{endDate},
 	 			#{writeDate}
  			)
- 			
  	</insert>
+ 	
+ 	<select id="boardCount" resultType="int">
+ 		select
+ 			count(*) as count
+ 		from board;
+ 	</select>
+ 	
+ 	<delete id="boardDelete" parameterType="int">
+ 	 	delete 
+ 	 		from board 
+ 	 		where number = #{deleteData}
+ 	</delete>
+ 	
+ 	<select id="detailList"  parameterType="int" resultType="com.wychoi.app.data.boardData">
+ 		select
+ 			writer,
+ 			writeDate,
+ 			startDate,
+ 			endDate,
+ 			useCalendar,
+ 			useShare,
+ 			title,
+ 			loofQuery,
+ 			number,
+ 			content
+ 		from board
+ 		where number = #{data};
+ 	</select>
 </mapper> 
  
  

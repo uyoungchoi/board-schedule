@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.wychoi.app.data.boardData;
 import com.wychoi.app.impl.scheduleSvcImpl;
 
 @Controller
@@ -31,11 +32,12 @@ public class scheduleCon {
 		ModelAndView mv = new ModelAndView("/schedule/scheduleHome");  //홈으로 이동
 		return mv;
 	}
+	
 	//스케줄추가
 	@RequestMapping(value = "schedule/addSchedule.do", method = RequestMethod.GET)
-	public @ResponseBody JSONObject addSchedule(HttpServletRequest request) {
+	public void addSchedule(HttpServletRequest request) {
 	
-		scheduleSvc = new scheduleSvcImpl();
+		/*scheduleSvc = new scheduleSvcImpl();
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -49,6 +51,15 @@ public class scheduleCon {
 		JSONObject returnData = new JSONObject();
 		returnData.put("status", "success");
 		
-		return returnData;
+		return returnData;*/
+		
+		boardData dData = new boardData();
+		
+		dData.setTitle(request.getParameter("title"));
+		dData.setContent(request.getParameter("content"));
+		dData.setUseShare(Integer.parseInt(request.getParameter("useShare")));
+		dData.setUseCalendar(1);  //달력은 무조건 사용
+		
+		
 	}
 }

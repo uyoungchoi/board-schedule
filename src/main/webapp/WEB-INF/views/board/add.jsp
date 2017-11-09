@@ -37,16 +37,29 @@
 	function addList(){
 		var useCalendar = 0; //사용안함.
 		var useShare = 0;
+		var startDate = null;
+		var endDate = null;
+		
 		if($( "input#useCalendar:checked" ).val() == undefined){
 			useCalendar = 0;
 		}else{
-			userCalendar = 1;
+			useCalendar = 1;
 		}
 		
-		if($( "input#useCalendar:checked" ).val() == undefined){
+		alert("useCalendar" + useCalendar)
+		
+		if($( "input#useShare:checked" ).val() == undefined){
 			useShare = 0;
 		}else{
 			useShare = 1;
+		}
+		
+		if($("#startDate").val() != "" || $("#startDate").val() != undefined){
+			startDate = $("#startDate").val()
+		}
+		
+		if($("#endDate").val() != "" || $("#endDate").val() != undefined){
+			endDate = $("#endDate").val()
 		}
 		
 		$.ajax({
@@ -58,8 +71,8 @@
 		    	"content" : $("#content").val(),
 		    	"useCalendar" : useCalendar,
 		    	"useShare" :useShare,
-		    	"startDate" : $("#startDate").val(),
-		    	"endDate" : $("#endDate").val()
+		    	"startDate" : startDate,
+		    	"endDate" : endDate
 		    },
 		    error : function(error) {
 		        alert("Error!");
@@ -74,26 +87,15 @@
 	
 </script>
 
-<style>
-	.board.add.addBoard{
-		padding-left:20px;
-		
-	}
-	.board.add.boardList div{
-		display:inline-block;
-		padding:10px;
-	}
-</style>
-
 </head>
 <body onload="alert('a')">
 	<div class="board content add">
 		<div class="board add boardList">
-			<div>제목</div><div class="addList div input"><input type="text" id="title" placeholder="제목" class="schedule content"></div>
+			<div class="ib">제목</div><div class="addList div input"><input type="text" id="title" placeholder="제목" class="schedule content"></div>
 		</div>
 		
 		<div class="board add boardList">
-			<div>내용</div><div class="addList div input"><input type="text" id="content" placeholder="내용" class="schedule content data"></div>
+			<div class="ib">내용</div><div class="addList div input"><textarea id="content" placeholder="내용" class="schedule content data"></textarea></div>
 			<!-- <div><input type="button" class="yesSelect" value="일정" onclick="resize(this)"></div> -->
 		</div>
 		

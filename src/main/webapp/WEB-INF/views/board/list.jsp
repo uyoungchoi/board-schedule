@@ -48,9 +48,26 @@
 		    },
 		    success : function(data) {
 		        alert("success!");
+		        $(".content.home").load("/board/list.do");
+		    }
+		});
+	}
+	
+	function detailList(data){
+		$.ajax({
+		    url : '/board/detail.do',  //확인페이지로 이동 modeland view로 리턴
+		    method : 'GET',
+		    data : {
+		    	"data" : data
 		    },
-		    complete : function() {
-		        alert("complete!");    
+		    async : false,
+		    error : function(error) {
+		        alert("Error!");
+		    },
+		    success : function(data) {
+		    	debugger;
+		        alert("success!");
+		        $(".content.home").html(data);
 		    }
 		});
 	}
@@ -92,7 +109,7 @@
 		    <tr align="center" class="boardList">
 		        <td><input type="checkbox" value="${book.number}"></td>
 		        <td>${book.number}</td>
-		        <td>${book.title}</td>
+		        <td><a href="#" onclick="detailList(${book.number})">${book.title}</a></td>
 		        <td>${book.writer}</td>
 		        <td>${book.writeDate}</td>
 		        <%-- 

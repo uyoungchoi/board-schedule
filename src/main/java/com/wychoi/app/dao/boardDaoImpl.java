@@ -20,11 +20,15 @@ public class boardDaoImpl implements boardDao{
 	@Override
 	public List<boardData> boardList() {
 		// TODO Auto-generated method stub
-		List<boardData> l = sqlSession.selectList("boardList");
-		System.out.println(l.get(0).getContent());
-		 return sqlSession.selectList("boardList");
+		return sqlSession.selectList("boardList");
 	}
 
+	@Override
+	public List<boardData> boardListOne() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardList");
+	}
+	
 	@Override
 	public List<boardData> login() {
 		// TODO Auto-generated method stub
@@ -35,5 +39,23 @@ public class boardDaoImpl implements boardDao{
 	public void boardAdd(boardData dData) {
 		// TODO Auto-generated method stub
 		sqlSession.selectList("boardAdd", dData);
+	}
+
+	@Override
+	public void deleteList(int deleteData) {
+		// TODO Auto-generated method stub
+		sqlSession.selectList("boardDelete", deleteData);
+	}
+
+	@Override
+	public int boardCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardCount");
+	}
+
+	@Override
+	public List<boardData> detailList(int data) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("detailList", data);
 	}
 }
