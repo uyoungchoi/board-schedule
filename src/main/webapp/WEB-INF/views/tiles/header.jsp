@@ -53,9 +53,12 @@ function myInfoPage(){
 function joinPage(){
 	//회원가입
 	$.ajax({
-        url : 'home/join.do',
+        url : '/log/joinPage.do',
         method : 'POST',
-        async : false
+        async : false,
+        success : function(data){
+        	$(".content.home").html(data);
+        }
     });
 }
 </script>

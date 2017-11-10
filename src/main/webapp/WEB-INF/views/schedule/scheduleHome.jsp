@@ -153,47 +153,44 @@ function closeSchedulePopup(){
 	$('.schedule.addSchedulePopup').css("display", "none");
 }
 function addPopup(){
+	<%if(session.getValue("id") != null){ %>
+		var useShare = 0;
+		
+		if($( "input#useCalendar:checked" ).val() == undefined){
+			useCalendar = 0;
+		}else{
+			useCalendar = 1;
+		}
+		debugger;
+		var startDate = $("#month").text().concat($("#date").text());
+		var endDate = $("#month").text().concat($("#date").text());
 	
-	var useShare = 0;
-	
-	if($( "input#useCalendar:checked" ).val() == undefined){
-		useCalendar = 0;
-	}else{
-		useCalendar = 1;
-	}
-	debugger;
-	var startDate = $("#month").text().concat($("#date").text());
-	var endDate = $("#month").text().concat($("#date").text());
-	startDate.replaceAll("년", "-");
-	startDate.replace("월", "-");
-	startDate.replace(" ", "");
-	
-	endDate.replace("년", "-");
-	endDate.replace("월", "-");
-	endDate.replace(" ", "");
-	alert(startDate);
-	alert(endDate);
-	
-	$.ajax({
-		data : {
-			"title" : $('#titlePopup').val(),
-			"content" : $("month").val()+$("date").val(),
-			"useShare" : useCalendar,
-			"startDate" : startDate,
-			"endDate" : endDate,
-		},
-        url : 'schedule/addSchedule.do',
-        method : 'GET',
-        async : false,
-	    error : function(error) {
-	        alert("Error!");
-	    },
-	    success : function(data) {
-	        alert("등록되었습니다.");
-	        $(".content.home").load("/board/list.do");
-	        //게시판 홈으로 이동
-	    }
-    });
+		startDate = ""+startDate.slice(0, 4) +"-"+ startDate.slice(6, 8) +"-"+ startDate.slice(9, 11);
+		endDate = ""+endDate.slice(0, 4) +"-"+ endDate.slice(6, 8) +"-"+ endDate.slice(9, 11);
+		
+		$.ajax({
+			data : {
+				"title" : $('#titlePopup').val(),
+				"content" : $("month").val()+$("date").val(),
+				"useShare" : useCalendar,
+				"startDate" : startDate,
+				"endDate" : startDate,
+			},
+	        url : 'schedule/addSchedule.do',
+	        method : 'GET',
+	        async : false,
+		    error : function(error) {
+		        alert("Error!");
+		    },
+		    success : function(data) {
+		        alert("등록되었습니다.");
+		        $(".content.home").load("/board/list.do");
+		        //게시판 홈으로 이동
+		    }
+	    });
+	<% }else{ %>
+	 	alert("로그인을 해야 이용할 수 있습니다.");
+	 <% }%>
 }
 </script>
 <style>
@@ -210,10 +207,10 @@ function addPopup(){
 	<div id="calendar"></div>
 	
 	<div class="schedule addSchedulePopup" style="display:none">
-		&nbsp;&nbsp;<div class="ib">일정등록</div><i class="fa fa-times" onclick="closeSchedulePopup()"></i><br><br>
-		<div class="ib">제목</div>&nbsp;<input type="text" placeholder="제목없음" id="titlePopup"><br>
-		<div class="ib">시간</div>&nbsp;<div id="month" class="ib schedule popup data"></div>&nbsp;<div id="date" class="ib schedule popup data"></div>일<br><br>
-		<div class="ib"><input type="checkbox" value="useShare" id="useShare" selected><label for="useShare">공유일정</label></div><br><br>
+		&nbsp;&nbsp;<div class="ibPopup">일정등록</div><i class="fa fa-times" onclick="closeSchedulePopup()"></i><br><br>
+		<div class="ibPopup">제목</div>&nbsp;<input type="text" placeholder="제목없음" id="titlePopup"><br>
+		<div class="ibPopup">시간</div>&nbsp;<div id="month" class="ibPopup schedule popup data"></div>&nbsp;<div id="date" class="ibPopup schedule popup data"></div>일<br><br>
+		<div class="ibPopup"><input type="checkbox" value="useShare" id="useShare" selected><label for="useShare">공유일정</label></div><br><br>
 		
 		<input type="button" value="등록" class="yesSelect" onclick="addPopup()">
 	</div>

@@ -44,7 +44,7 @@ public class logCon {
 	}
 	//로그인
 	@RequestMapping(value = "/log/login.do", method = RequestMethod.POST)
-	public String login(Model model, HttpServletRequest request) {
+	public void login(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
 		
 		userData uData = new userData();
@@ -63,18 +63,17 @@ public class logCon {
 		else {
 			//새로고침!!! 일치하는 아이디 없음~!
 		}
-		return "/tiles/tiles-layout";
 	}
 	//로그아웃
 	@RequestMapping(value = "/log/logout.do", method = RequestMethod.POST)
-	public ModelAndView logout_get(Model model, HttpServletRequest request) {
+	public void logout_get(Model model, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("result", "success");
 		//캐시삭제
 		HttpSession session = request.getSession();
+		System.out.println("name :L"+session.getAttribute("id"));
 		session.invalidate();//세션제거
 		//새로고침!
-		return mv;
 	}
 	//로그아웃
 	@RequestMapping(value = "/log/joinPage.do", method = RequestMethod.POST)
@@ -83,7 +82,13 @@ public class logCon {
 	}
 	//로그아웃
 	@RequestMapping(value = "/log/join.do", method = RequestMethod.POST)
-	public void join(Model model) {
+	public String join(Model model, HttpServletRequest request) {
 		//db에 데이터 넣기
+		userData uData = new userData();
+		uData.setId(request.getParameter("id"));
+		uData.setName(request.getParameter("name"));
+		uData.setPassWd(request.getParameter("passwd"));
+		userSvc.join(uData);
+		return "log/login";
 	}
 }

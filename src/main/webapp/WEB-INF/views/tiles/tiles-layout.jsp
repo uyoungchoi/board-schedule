@@ -63,7 +63,6 @@ function onload(){
 </script>
 </head>
 <body>
-
 	<div id="tiles header">
 		<tiles:insertAttribute name="header_tiles" />
 	</div>
@@ -83,6 +82,5 @@ function onload(){
 	<div id="tiles footer">
 		<tiles:insertAttribute name="footer_tiles"/>
 	</div>
-
 </body>
 </html>

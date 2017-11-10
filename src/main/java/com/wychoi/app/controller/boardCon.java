@@ -65,7 +65,7 @@ public class boardCon {
 		dData.setContent(request.getParameter("content"));
 		dData.setUseCalendar(Integer.parseInt(request.getParameter("useCalendar")));
 		dData.setUseShare(Integer.parseInt(request.getParameter("useShare")));
-		
+		dData.setType("board");
 		HttpSession session = request.getSession();
 		dData.setWriter(session.getAttribute("id").toString());
 
@@ -102,6 +102,7 @@ public class boardCon {
 		
 		JSONArray jsonObj = new JSONArray(deleteDatas);
 		for(int i=0;i<length;i++) {
+			System.out.println(jsonObj.getInt(i));
 			 boardSvc.deleteList(jsonObj.getInt(i)); 
 			 model.addAttribute("result", "success"); 
 		}

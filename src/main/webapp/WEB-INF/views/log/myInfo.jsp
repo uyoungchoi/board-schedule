@@ -34,7 +34,7 @@ function login(){
 	<div class="ib">아이디</div><div class="login div input"><input type="text" id="id" placeholder="아이디" class="schedule content"></div>
 </div>
 <div class="board add boardList">
-	<div class="ib">패스워드</div><div class="login div input"><input type="password" id="passwd" placeholder="비밀번호" class="schedule content"></div>
+	<div class="ib">패스워드</div><div class="login div input"><input type="text" id="passwd" placeholder="비밀번호" class="schedule content"></div>
 </div>
 <input type="button" value="로그인" onclick="login()">
 </div>

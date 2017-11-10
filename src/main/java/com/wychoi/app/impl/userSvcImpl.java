@@ -23,4 +23,10 @@ public class userSvcImpl implements userSvc{
 		return userDao.login(uData);
 	}
 
+	@Override
+	public void join(userData uData) {
+		// TODO Auto-generated method stub
+		userDao.join(uData);
+	}
+
 }

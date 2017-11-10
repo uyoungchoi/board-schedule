@@ -21,7 +21,7 @@
  	<insert id="boardAdd" parameterType="com.wychoi.app.data.boardData">
  		insert
  			into board
- 			(title, content, useCalendar, useShare, writer, startDate, endDate, writeDate)
+ 			(title, content, useCalendar, useShare, writer, startDate, endDate, writeDate, type)
  			values(
 	 			#{title},
 	 			#{content},
@@ -30,7 +30,8 @@
 	 			#{writer},
 	 			#{startDate},
 	 			#{endDate},
-	 			#{writeDate}
+	 			#{writeDate},
+	 			#{type}
  			)
  	</insert>
  	

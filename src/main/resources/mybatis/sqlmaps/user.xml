@@ -9,7 +9,10 @@
  		where id = #{id} and
  		      passWd = #{passWd}
  	</select>
- 	
+ 	<insert id="join" parameterType="com.wychoi.app.data.userData">
+ 		insert into userInfo
+ 			   values(#{id}, #{passWd}, #{name}, null, null);
+ 	</insert>
 </mapper> 
  
  

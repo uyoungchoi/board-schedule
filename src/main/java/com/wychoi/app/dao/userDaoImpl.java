@@ -24,4 +24,10 @@ public class userDaoImpl implements userDao{
 		return sqlSession.selectOne("login", uData);
 	}
 
+	@Override
+	public void join(userData uData) {
+		// TODO Auto-generated method stub
+		sqlSession.selectList("join", uData);
+	}
+
 }

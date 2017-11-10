@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<% session = request.getSession(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,46 +11,53 @@
 <script>
 	//글 등록
 	function addListPage(){
-		 $.ajax({
-		    url : 'board/addPage.do',
-		    method : 'GET',
-		    async : false,
-		    error : function(error, message) {
-		        alert(error);
-		        alert(message);
-		    },
-		    success : function(data) {
-		        $('.content.home').html(data);
-		    },
-		    complete : function() {
-		    }
-		}); 
+		<%if(session.getValue("id") != null){ %>
+			 $.ajax({
+			    url : 'board/addPage.do',
+			    method : 'GET',
+			    async : false,
+			    error : function(error, message) {
+			        alert(error);
+			        alert(message);
+			    },
+			    success : function(data) {
+			        $('.content.home').html(data);
+			    }
+			}); 
+		 <% }else{ %>
+		 	alert("로그인을 해야 이용할 수 있습니다.");
+		 <% }%>
 		/* $('.content.home').load("/board/add.jsp"); */
 	}
 	
 	//글 삭제
 	function deleteList(){
-		var deleteDatas = [];
-		$('#boardList input:checked').each(function() {
-			deleteDatas.push(this.value);
-        });
-		debugger;
-		$.ajax({
-		    url : '/board/delete.do',
-		    method : 'GET',
-		    data : {
-		    	"deleteDatas" : JSON.stringify(deleteDatas),
-		    	"length" : deleteDatas.length
-		    },
-		    async : false,
-		    error : function(error) {
-		        alert("Error!");
-		    },
-		    success : function(data) {
-		        alert("success!");
-		        $(".content.home").load("/board/list.do");
-		    }
-		});
+		<%if(session.getValue("id") != null){ %>
+			var deleteDatas = [];
+			$('#boardList input:checked').each(function() {
+				deleteDatas.push(this.value);
+	        });
+			debugger;
+			$.ajax({
+			    url : '/board/delete.do',
+			    method : 'GET',
+			    data : {
+			    	"deleteDatas" : JSON.stringify(deleteDatas),
+			    	"length" : deleteDatas.length
+			    },
+			    async : false,
+			    success : function(data) {
+			        alert("success!");
+			        $(".content.home").load("/board/list.do");
+			    },
+			    error : function(error) {
+			    	debugger;
+			        alert("Error!");
+			    }
+			});
+		 <% }else{ %>
+		 	alert("로그인을 해야 이용할 수 있습니다.");
+		 <% }%>
 	}
 	
 	function detailList(data){
@@ -95,13 +102,6 @@
 	        <td width="35%" class="boardList">제목</td>
 	        <td width="10%" class="boardList">작성자</td>
 	        <td width="20%" class="boardList">작성일</td>
-	        <!-- 
-	        <td width="100px">작성일</td>
-	        <td width="100px">시작일</td>
-	        <td width="100px">종료일</td>
-	        <td width="100px">권한</td>
-	        <td width="200px">루프 쿼리</td>
-	        <td width="200px">내용</td> -->
 	    </tr>
 	</thead>
 		<tbody id="boardList" class="boardList">
@@ -112,12 +112,6 @@
 		        <td><a href="#" onclick="detailList(${book.number})">${book.title}</a></td>
 		        <td>${book.writer}</td>
 		        <td>${book.writeDate}</td>
-		        <%-- 
-		        <td>${book.startDate}</td>
-		        <td>${book.endDate}</td>
-		        <td>${book.shareAcl}</td>
-		        <td>${book.loofQuery}</td>
-		        <td>${book.content}</td> --%>
 		    </tr>
 		</c:forEach>
 	</tbody>

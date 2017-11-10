@@ -23,17 +23,11 @@ window.onload = function (){
 function toggle(data){
 	if(data.getAttribute("name")=="board"){   //보이는 화면 변경(게시판 클릭시)
 		$(".content.home").load("/board/list.do");
-		/* $("#boardContent").css("display", "block");
-		$("#scheduleContent").css("display", "none"); */
-		
 		$('[name=board]').attr("class", "yesSelect");
 		$('[name=schedule]').attr("class", "noSelect");
 		
 	}else{
 		$(".content.home").load("../schedule/scheduleHome.jsp");
-		/* $("#boardContent").css("display", "none");
-		$("#scheduleContent").css("display", "block");*/
-		
 		$('[name=board]').attr("class", "noSelect");
 		$('[name=schedule]').attr("class", "yesSelect");
 	}

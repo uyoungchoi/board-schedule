@@ -42,14 +42,18 @@ public class scheduleCon {
 	
 		boardData dData = new boardData();
 		
+		System.out.println(request.getParameter("startDate"));
 		dData.setTitle(request.getParameter("title"));
 		dData.setContent(request.getParameter("content"));
 		dData.setUseShare(Integer.parseInt(request.getParameter("useShare")));
 		dData.setUseCalendar(1);  //달력은 무조건 사용
 
 		HttpSession session = request.getSession();
-		dData.setWriter(session.getAttribute("id").toString());  //현재 id로 등록
+		System.out.println(session.getAttribute("id"));
+		dData.setWriter((String)session.getAttribute("id"));  //현재 id로 등록
 		dData.setType("schedule");  //board 또는 schedule
+		dData.setStartDate(request.getParameter("startDate"));
+		dData.setEndDate(request.getParameter("endDate"));
 		
 		if(request.getParameter("content") == "") {
 			dData.setStartDate(null);
