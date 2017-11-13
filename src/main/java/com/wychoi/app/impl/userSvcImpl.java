@@ -29,4 +29,10 @@ public class userSvcImpl implements userSvc{
 		userDao.join(uData);
 	}
 
+	@Override
+	public List<userData> myInfo(String id) {
+		// TODO Auto-generated method stub
+		return userDao.myInfo(id);
+	}
+
 }

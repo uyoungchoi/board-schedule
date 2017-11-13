@@ -13,6 +13,10 @@
  		insert into userInfo
  			   values(#{id}, #{passWd}, #{name}, null, null);
  	</insert>
+ 	<select id="myInfo" parameterType="String" resultType="com.wychoi.app.data.userData">
+ 		select
+ 			
+ 	</select>
 </mapper> 
  
  

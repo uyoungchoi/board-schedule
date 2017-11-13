@@ -28,7 +28,7 @@ import com.wychoi.app.service.boardSvc;
 import com.wychoi.app.service.userSvc;
 
 @Controller
-public class logCon {
+public class userCon {
 	
 	@Autowired
 	boardSvc boardSvc; 
@@ -38,13 +38,14 @@ public class logCon {
 	
 	private static final Logger logger = LoggerFactory.getLogger(homeCon.class);
 	//로그인 페이지
-	@RequestMapping(value = "/log/loginPage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/loginPage.do", method = RequestMethod.POST)
 	public String loginPage(Model model) {
 		return "log/login";
 	}
 	//로그인
-	@RequestMapping(value = "/log/login.do", method = RequestMethod.POST)
-	public void login(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/user/login.do", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public String login(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
 		
 		userData uData = new userData();
@@ -55,7 +56,9 @@ public class logCon {
 		System.out.println("id : "+id);
 		System.out.println("passwd : "+request.getParameter("passwd"));
 		
-		if(userSvc.login(uData) == 1) {
+		int result = userSvc.login(uData);
+		
+		if(result == 1) {
 			//로그인 성공(세션 만들기)
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
@@ -63,9 +66,11 @@ public class logCon {
 		else {
 			//새로고침!!! 일치하는 아이디 없음~!
 		}
+		
+		return new JSONObject().put("result",result).toString();
 	}
 	//로그아웃
-	@RequestMapping(value = "/log/logout.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/logout.do", method = RequestMethod.POST)
 	public void logout_get(Model model, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("result", "success");
@@ -76,12 +81,12 @@ public class logCon {
 		//새로고침!
 	}
 	//로그아웃
-	@RequestMapping(value = "/log/joinPage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/joinPage.do", method = RequestMethod.POST)
 	public String joinPage(Model model) {
 		return "log/join";
 	}
 	//로그아웃
-	@RequestMapping(value = "/log/join.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/join.do", method = RequestMethod.POST)
 	public String join(Model model, HttpServletRequest request) {
 		//db에 데이터 넣기
 		userData uData = new userData();
@@ -91,4 +96,27 @@ public class logCon {
 		userSvc.join(uData);
 		return "log/login";
 	}
+	//내정보보기
+	@RequestMapping(value = "/user/myInfo.do", method = RequestMethod.POST)
+	public List<userData> myInfo(Model model, HttpServletRequest request) {
+		//세션아이디를 얻어 DB조회
+		HttpSession session = request.getSession();
+		String id = session.getAttribute("id").toString();
+		return userSvc.myInfo(id);
+	}
+	//비밀번호확인(내정보보기에 들어갈 경우)
+	@RequestMapping(value = "/user/chkPasswdPage.do", method = RequestMethod.POST)
+	public String chkPasswdPage(Model model, HttpServletRequest request) {
+		//세션아이디를 얻어 DB조회
+		return "user/chkPasswd";
+	}
+	//비밀번호확인(내정보보기에 들어갈 경우)
+		@RequestMapping(value = "/user/chkPasswd.do", method = RequestMethod.POST)
+		public String chkPasswd(Model model, HttpServletRequest request) {
+			//세션아이디를 얻어 DB조회
+			HttpSession session = request.getSession();
+			String id=session.getAttribute("id").toString();
+			model.addAttribute("myInfo", userSvc.myInfo(id));
+			return "user/myInfo";
+		}
 }

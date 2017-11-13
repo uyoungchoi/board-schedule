@@ -122,7 +122,6 @@ $( document ).ready(function() {
 });
 function addSchedulePopup(data){
 	//div¸¦ ±×¸²..
-	debugger;
 	var $href = window.event;
 	$href.pageX;
 	
@@ -149,7 +148,6 @@ function addSchedulePopup(data){
 	
 }
 function closeSchedulePopup(){
-	debugger;
 	$('.schedule.addSchedulePopup').css("display", "none");
 }
 function addPopup(){
@@ -161,7 +159,6 @@ function addPopup(){
 		}else{
 			useCalendar = 1;
 		}
-		debugger;
 		var startDate = $("#month").text().concat($("#date").text());
 		var endDate = $("#month").text().concat($("#date").text());
 	

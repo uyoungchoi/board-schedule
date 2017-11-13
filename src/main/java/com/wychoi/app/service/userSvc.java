@@ -8,4 +8,5 @@ import com.wychoi.app.data.userData;
 public interface userSvc {
 	int login(userData uData);
 	void join(userData uData);
+	List<userData> myInfo(String id);
 }

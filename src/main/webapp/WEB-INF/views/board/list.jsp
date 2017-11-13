@@ -37,7 +37,6 @@
 			$('#boardList input:checked').each(function() {
 				deleteDatas.push(this.value);
 	        });
-			debugger;
 			$.ajax({
 			    url : '/board/delete.do',
 			    method : 'GET',
@@ -51,7 +50,6 @@
 			        $(".content.home").load("/board/list.do");
 			    },
 			    error : function(error) {
-			    	debugger;
 			        alert("Error!");
 			    }
 			});
@@ -72,7 +70,6 @@
 		        alert("Error!");
 		    },
 		    success : function(data) {
-		    	debugger;
 		        alert("success!");
 		        $(".content.home").html(data);
 		    }
@@ -80,11 +77,6 @@
 	}
 </script>
 
-<style>
-.board.list.boardList{
-	
-}
-</style>
 </head>
 <body>
 <div class="board list">

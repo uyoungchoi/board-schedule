@@ -11,9 +11,8 @@
 </head>
 <script>
 function loginPage(){
-	debugger;
 	$.ajax({
-        url : 'log/loginPage.do',
+        url : 'user/loginPage.do',
         method : 'POST',
         async : false,
         success : function(data){
@@ -29,7 +28,7 @@ function loginPage(){
 function logout(){
 	//쿠키제거
 	$.ajax({
-        url : 'log/logout.do',
+        url : 'user/logout.do',
         method : 'POST',
         async : false,
         success : function(data){
@@ -42,18 +41,21 @@ function logout(){
         }
     });
 }
-function myInfoPage(){
-	//내 정보 보기
+
+function chkPasswdPage(){
 	$.ajax({
-        url : 'home/myInfo.do',
+        url : 'user/chkPasswdPage.do',
         method : 'POST',
-        async : false
+        async : false,
+        success : function(data){
+        	$(".content.home").html(data);
+        }
     });
 }
 function joinPage(){
 	//회원가입
 	$.ajax({
-        url : '/log/joinPage.do',
+        url : '/user/joinPage.do',
         method : 'POST',
         async : false,
         success : function(data){
@@ -70,7 +72,7 @@ function joinPage(){
 <a href="#" onclick="joinPage()">회원가입 </a>
 <%}else{%>
 <a href="#" onclick="logout()">로그아웃 |</a>
-<a href="#" onclick="myInfoPage()">내정보</a></div> 
+<a href="#" onclick="chkPasswdPage()">내정보</a></div> 
 <%}%>
 </body>
 </html>

@@ -13,22 +13,14 @@
 <script>
 function login(){
 	$.ajax({
-        url : 'user/login.do',
+        url : '/user/chkPasswd.do',
         method : 'POST',
-        data : {
-        	"id" : $("#id").val(),
-        	"passwd" : $("#passwd").val()
-        },
         async : false,
         success : function(data){
         	debugger;
-        	if(data.result == 1){
-        		alert("로그인 성공!!");
-        		window.location.reload();
-        	} else {
-        		alert("아이디나 비밀번호를 확인해주세요");
-        		return false;
-        	}
+        	//비밀번호 확인 완료시,
+        	//받은 데이터를  modelAndView로 넘여줌....
+        	$(".content.home").html(data);
         }, 
         error : function(error, status){
         	alert("서버오류 발생! 관리자에게 문의해주세요");
@@ -40,13 +32,11 @@ function login(){
 
 <body>
 <div class="board content add">
-<div class="board add boardList">
-	<div class="ib">아이디</div><div class="login div input"><input type="text" id="id" placeholder="아이디" class="schedule content"></div>
-</div>
+
 <div class="board add boardList">
 	<div class="ib">패스워드</div><div class="login div input"><input type="password" id="passwd" placeholder="비밀번호" class="schedule content"></div>
 </div>
-<input type="button" value="로그인" onclick="login()">
+<input type="button" value="비밀번호확인" onclick="login()">
 </div>
 </body>
 </html>
