@@ -6,21 +6,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-
+<% session = request.getSession(); %>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+function modifyList(){
+	<%if(session.getValue("id") != null){ %>
+		//현재 세션과 글작성자가 같은 경우만 수정 가능
+		<%if(session.getValue("id").equals("$('#writer').val()")){ %>
+		
+		<% }else{ %>
+			alert("작성자만 수정할 수 있습니다.");
+		<% }%>
+	<% }else{ %>
+ 		alert("로그인이 필요합니다.");
+ <% }%>
+}
+</script>
 </head>
 <c:forEach var="rData" items="${rData}">
 <body>
 <div class="board content add">
 	<div class="board add boardList">
-		<div class="ib">제목</div><div class="addList div input"><input type="text" id="title" placeholder="제목" class="schedule content" value="${rData.title}"></div>
+		<div class="ib">제목</div><div class="addList div input"><input type="text" id="title" class="schedule content" value="${rData.title}"></div>
 	</div>
 	
 	<div class="board add boardList">
-		<div class="ib">내용</div><div class="addList div input"><textarea id="content" placeholder="내용" class="schedule content data">${rData.content}</textarea></div>
+		<div class="ib">내용</div><div class="addList div input"><textarea id="content" class="schedule content data">${rData.content}</textarea></div>
 		<!-- <div><input type="button" class="yesSelect" value="일정" onclick="resize(this)"></div> -->
+	</div>
+	
+	<div class="board add boardList" style="display:none">
+		<input type="text" id="writer" class="schedule content" value="${rData.writer}"><!-- 작성자는 수정시 사용 -->
 	</div>
 	
 	<div class="board add boardList">
@@ -53,7 +71,7 @@
 	</div>
 	
 	<div class="board add boardList">
-		<div class="addList div"><input type="button" id="addList" onclick="addList()" value="일정수정"></div>
+		<div class="addList div"><input type="button" id="addList" onclick="modifyList()" value="일정수정"></div>
 	</div>
 </div>
 </body>

@@ -34,18 +34,35 @@ public class boardCon {
 	private static final Logger logger = LoggerFactory.getLogger(homeCon.class);
 	
 	@RequestMapping(value = "/board/list.do", method = RequestMethod.GET)
-	public String list(Model model) {
-		//갯수 select
-		System.out.println(boardSvc.boardCount());
-		if(boardSvc.boardCount() <=0) {
-			 model.addAttribute("books", boardSvc.boardListOne()); 
-			 model.addAttribute("result", "success"); 
-			 return "board/list";
+	public String list(Model model, HttpServletRequest request) {
+		//세션이 되어 있을 경우 세션 id와 공유일정 검색
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("id")!=null) {
+			
+			String id = session.getAttribute("id").toString();
+			System.out.println(boardSvc.boardCount(id));
+			if(boardSvc.boardCount(id) <=0) {
+				 model.addAttribute("books", boardSvc.boardListOne(id)); 
+				 model.addAttribute("result", "success"); 
+			}else {
+				 model.addAttribute("books", boardSvc.boardList(id)); 
+				 model.addAttribute("result", "success"); 
+			}
+			
 		}else {
-			 model.addAttribute("books", boardSvc.boardList()); 
-			 model.addAttribute("result", "success"); 
-			 return "board/list";
+			
+			System.out.println(boardSvc.boardCountNotSession());
+			if(boardSvc.boardCountNotSession() <=0) {
+				 model.addAttribute("books", boardSvc.boardListOneNotSession()); 
+				 model.addAttribute("result", "success"); 
+			}else {
+				 model.addAttribute("books", boardSvc.boardListNotSession()); 
+				 model.addAttribute("result", "success"); 
+			}
+			
 		}
+		 return "board/list";
 	}
 	
 	@RequestMapping(value = "/board/detail.do", method = RequestMethod.GET)
@@ -96,16 +113,23 @@ public class boardCon {
 	}
 	
 	@RequestMapping(value = "/board/delete.do", method = RequestMethod.GET)
-	public void delete(Locale locale, Model model, HttpServletRequest request) {
+	@ResponseBody
+	public String delete(Locale locale, Model model, HttpServletRequest request) {
+		
 		String deleteDatas = request.getParameter("deleteDatas");
 		int length = Integer.parseInt(request.getParameter("length"));
-		
 		JSONArray jsonObj = new JSONArray(deleteDatas);
+		
 		for(int i=0;i<length;i++) {
-			System.out.println(jsonObj.getInt(i));
-			 boardSvc.deleteList(jsonObj.getInt(i)); 
-			 model.addAttribute("result", "success"); 
+			
+			boardData bData = new boardData();
+			bData.setWriter(request.getParameter("id"));
+			bData.setNumber(jsonObj.getInt(i));
+			
+			boardSvc.deleteList(bData); 
+			
 		}
+		return new JSONObject().put("result","success").toString();
 	}
 	
 	@RequestMapping(value = "/board/update.do", method = RequestMethod.GET)

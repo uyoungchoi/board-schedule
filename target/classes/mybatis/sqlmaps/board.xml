@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wychoi.app">
- 	<select id="boardList" resultType="com.wychoi.app.data.boardData">
+ 	<select id="boardList" resultType="com.wychoi.app.data.boardData" parameterType="String">
  		select
  			writer,
  			writeDate,
@@ -15,7 +15,23 @@
  			number,
  			content
  		from board
- 		where type='board';
+ 		where type='board' and useShare = 1 or writer=#{id};
+ 	</select>
+ 	
+ 	<select id="boardListNotSession" resultType="com.wychoi.app.data.boardData">
+ 		select
+ 			writer,
+ 			writeDate,
+ 			startDate,
+ 			endDate,
+ 			useCalendar,
+ 			useShare,
+ 			title,
+ 			loofQuery,
+ 			number,
+ 			content
+ 		from board
+ 		where type='board' and useShare = 1;
  	</select>
  	
  	<insert id="boardAdd" parameterType="com.wychoi.app.data.boardData">
@@ -35,17 +51,24 @@
  			)
  	</insert>
  	
- 	<select id="boardCount" resultType="int">
+ 	<select id="boardCount" resultType="int" parameterType="String">
  		select
  			count(*) as count
  		from board
- 		where type='board';
+ 		where type='board' and useShare = 1 or writer=#{id};
  	</select>
  	
- 	<delete id="boardDelete" parameterType="int">
+ 	<select id="boardCountNotSession" resultType="int">  <!-- 세션이 없으므로 공유일정인 것들만 검색 -->
+ 		select
+ 			count(*) as count
+ 		from board
+ 		where type='board' and useShare = 1;
+ 	</select>
+ 	
+ 	<delete id="boardDelete" parameterType="com.wychoi.app.data.boardData">
  	 	delete 
  	 		from board 
- 	 		where number = #{deleteData};
+ 	 		where number = #{number} and writer = #{writer};
  	</delete>
  	
  	<select id="detailList"  parameterType="int" resultType="com.wychoi.app.data.boardData">

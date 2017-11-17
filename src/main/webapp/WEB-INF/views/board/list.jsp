@@ -42,15 +42,18 @@
 			    method : 'GET',
 			    data : {
 			    	"deleteDatas" : JSON.stringify(deleteDatas),
-			    	"length" : deleteDatas.length
+			    	"length" : deleteDatas.length,
+			    	"id" : "<%=session.getValue("id")%>"
 			    },
 			    async : false,
 			    success : function(data) {
-			        alert("success!");
+			        alert("자신이 작성한 글만 삭제되었습니다.");
 			        $(".content.home").load("/board/list.do");
 			    },
-			    error : function(error) {
-			        alert("Error!");
+			    error : function(error, message) {
+			    	debugger;
+			        alert(error);
+			        alert(message);
 			    }
 			});
 		 <% }else{ %>
@@ -75,6 +78,9 @@
 		    }
 		});
 	}
+	function selectAll(){
+		debugger;
+	}
 </script>
 
 </head>
@@ -89,7 +95,7 @@
 <table class="boardList">
 	<thead class="board list boardList">
 		<tr align="center" class="boardList">
-			<td width="10%" class="boardList">삭제</td>
+			<td width="10%" class="boardList"><input type="checkbox" id="selectAll" onclick="selectAll()">삭제</td>
 	        <td width="15%" class="boardList">글번호</td>
 	        <td width="35%" class="boardList">제목</td>
 	        <td width="10%" class="boardList">작성자</td>

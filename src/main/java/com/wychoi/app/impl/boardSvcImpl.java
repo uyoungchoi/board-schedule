@@ -18,15 +18,15 @@ public class boardSvcImpl implements boardSvc{
     private boardDao boardDao;
 	
 	@Override
-	public @ResponseBody List<boardData> boardList() {
+	public @ResponseBody List<boardData> boardList(String id) {
 		// TODO Auto-generated method stub
-		return boardDao.boardList();
+		return boardDao.boardList(id);
 	}
 
 	@Override
-	public List<boardData> boardListOne() {
+	public List<boardData> boardListOne(String id) {
 		// TODO Auto-generated method stub
-		return boardDao.boardListOne();
+		return boardDao.boardListOne(id);
 	}
 	
 	@Override
@@ -36,15 +36,15 @@ public class boardSvcImpl implements boardSvc{
 	}
 
 	@Override
-	public void deleteList(int deleteData) {
+	public void deleteList(boardData dData) {
 		// TODO Auto-generated method stub
-		boardDao.deleteList(deleteData);
+		boardDao.deleteList(dData);
 	}
 
 	@Override
-	public int boardCount() {
+	public int boardCount(String id) {
 		// TODO Auto-generated method stub
-		return boardDao.boardCount();
+		return boardDao.boardCount(id);
 	}
 
 	@Override
@@ -57,6 +57,24 @@ public class boardSvcImpl implements boardSvc{
 	public void scheduleAdd(boardData dData) {
 		// TODO Auto-generated method stub
 		boardDao.scheduleAdd(dData);
+	}
+
+	@Override
+	public int boardCountNotSession() {
+		// TODO Auto-generated method stub
+		return boardDao.boardCountNotSession();
+	}
+
+	@Override
+	public List<boardData> boardListNotSession() {
+		// TODO Auto-generated method stub
+		return boardDao.boardListNotSession();
+	}
+
+	@Override
+	public List<boardData> boardListOneNotSession() {
+		// TODO Auto-generated method stub
+		return boardDao.boardListOneNotSession();
 	}
 
 

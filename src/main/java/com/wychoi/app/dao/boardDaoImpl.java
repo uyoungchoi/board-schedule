@@ -18,15 +18,15 @@ public class boardDaoImpl implements boardDao{
     }
 
 	@Override
-	public List<boardData> boardList() {
+	public List<boardData> boardList(String id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardList");
+		return sqlSession.selectList("boardList", id);
 	}
 
 	@Override
-	public List<boardData> boardListOne() {
+	public List<boardData> boardListOne(String id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("boardList");
+		return sqlSession.selectOne("boardList", id);
 	}
 	
 
@@ -37,15 +37,15 @@ public class boardDaoImpl implements boardDao{
 	}
 
 	@Override
-	public void deleteList(int deleteData) {
+	public void deleteList(boardData dData) {
 		// TODO Auto-generated method stub
-		sqlSession.selectList("boardDelete", deleteData);
+		sqlSession.selectList("boardDelete", dData);
 	}
 
 	@Override
-	public int boardCount() {
+	public int boardCount(String id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("boardCount");
+		return sqlSession.selectOne("boardCount", id);
 	}
 
 	@Override
@@ -59,5 +59,23 @@ public class boardDaoImpl implements boardDao{
 		// TODO Auto-generated method stub
 		sqlSession.selectList("scheduleAdd", dData);
 		
+	}
+
+	@Override
+	public int boardCountNotSession() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardCountNotSession");
+	}
+
+	@Override
+	public List<boardData> boardListNotSession() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardListNotSession");
+	}
+
+	@Override
+	public List<boardData> boardListOneNotSession() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardListNotSession");
 	}
 }
